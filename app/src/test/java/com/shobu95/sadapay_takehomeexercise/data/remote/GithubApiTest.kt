@@ -1,7 +1,7 @@
 package com.shobu95.sadapay_takehomeexercise.data.remote
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.shobu95.sadapay_takehomeexercise.data.source.remote.client.MyRetrofitClient
+import com.shobu95.sadapay_takehomeexercise.data.source.remote.client.RetrofitClient
 import com.shobu95.sadapay_takehomeexercise.data.source.remote.services.GithubRepoService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -22,7 +22,7 @@ class GithubApiTest {
 
     @Before
     fun setupService() {
-        service = MyRetrofitClient.githubRepoService
+        service = RetrofitClient.githubRepoService
     }
 
     @ExperimentalCoroutinesApi

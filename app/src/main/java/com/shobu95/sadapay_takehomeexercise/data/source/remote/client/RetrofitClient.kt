@@ -4,7 +4,7 @@ import com.shobu95.sadapay_takehomeexercise.data.source.remote.services.GithubRe
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object MyRetrofitClient {
+object RetrofitClient {
 
     private val retrofit by lazy {
         val BASE_URL = "https://api.github.com/"
