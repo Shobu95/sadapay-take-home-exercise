@@ -9,10 +9,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class GithubRepoRepositoryImpl(
-    val dao: GithubRepoDao,
-    val service: GithubRepoService,
+class GithubRepoRepositoryImpl
+@Inject constructor(
+    private val dao: GithubRepoDao,
+    private val service: GithubRepoService,
 ) : GithubRepoRepository {
 
 
