@@ -14,6 +14,6 @@ interface GithubRepoDao {
     fun getAll(): Flow<List<GithubRepoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(githubRepos: Flow<List<GithubRepoEntity>>)
+    fun insertAll(githubRepos: List<GithubRepoEntity>)
 
 }
