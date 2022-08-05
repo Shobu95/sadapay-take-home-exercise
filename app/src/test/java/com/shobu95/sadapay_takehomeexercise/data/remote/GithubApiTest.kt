@@ -30,23 +30,28 @@ class GithubApiTest {
         service = RetrofitClient.githubRepoService
     }
 
+    @Test
+    fun `1- github service instance should not be null`() {
+        assertThat(service, notNullValue())
+    }
+
     @ExperimentalCoroutinesApi
     @Test
-    fun `1- api should return non-null response`() = runBlocking {
+    fun `2- api should return non-null response`() = runBlocking {
         val response = service.getTrendingRepos()
         assertThat(response, notNullValue())
     }
 
     @ExperimentalCoroutinesApi
     @Test
-    fun `2- returned items in response should not be empty`() = runBlocking {
+    fun `3- returned items in response should not be empty`() = runBlocking {
         val response = service.getTrendingRepos()
         assertThat(response.items.size, not(0))
     }
 
     @ExperimentalCoroutinesApi
     @Test
-    fun `3- first item of the returned response should have all values initialized`() =
+    fun `4- first item of the returned response should have all values initialized`() =
         runBlocking {
             val response = service.getTrendingRepos()
             val githubRepoObj = response.items[0]

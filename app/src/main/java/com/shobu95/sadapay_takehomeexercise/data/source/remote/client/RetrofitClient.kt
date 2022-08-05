@@ -19,5 +19,4 @@ object RetrofitClient {
         retrofit.create(GithubRepoService::class.java)
     }
 
-
 }
