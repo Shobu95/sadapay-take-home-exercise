@@ -1,12 +1,12 @@
 package com.shobu95.sadapay_takehomeexercise.data.local
 
-import android.content.Context
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.shobu95.sadapay_takehomeexercise.data.source.local.dao.GithubRepoDao
 import com.shobu95.sadapay_takehomeexercise.data.source.local.database.GithubRepoDatabase
 import com.shobu95.sadapay_takehomeexercise.data.source.local.entity.GithubRepoEntity
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.HiltTestApplication
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -15,32 +15,33 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.notNullValue
-import org.junit.After
+import org.junit.*
 import org.junit.Assert.assertEquals
-import org.junit.Before
-import org.junit.FixMethodOrder
-import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
+import org.robolectric.annotation.Config
+import javax.inject.Inject
 
+@HiltAndroidTest
+@Config(application = HiltTestApplication::class)
 @RunWith(AndroidJUnit4::class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class GithubRepoDatabaseTest {
 
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
+
+    @Inject
     lateinit var db: GithubRepoDatabase
+
+    @Inject
     lateinit var dao: GithubRepoDao
 
     @Before
-    fun `initialize database instance`() {
-
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(
-            context,
-            GithubRepoDatabase::class.java
-        ).build()
-
-        dao = db.githubRepoDao
+    fun init() {
+        hiltRule.inject()
     }
+
 
     @Test
     fun `1- should initialize database`() {
