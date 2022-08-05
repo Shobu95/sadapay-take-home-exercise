@@ -1,6 +1,7 @@
 package com.shobu95.sadapay_takehomeexercise.data.source.remote.dto
 
 import com.google.gson.annotations.SerializedName
+import com.shobu95.sadapay_takehomeexercise.data.source.local.entity.GithubRepoEntity
 
 data class GithubRepoResponseDto(
     @SerializedName("items") val items: List<GithubRepoDto> = emptyList(),
@@ -34,3 +35,17 @@ data class OwnerDto(
     @SerializedName("avatar_url")
     val avatar: String,
 )
+
+fun GithubRepoResponseDto.asDatabaseModel(): List<GithubRepoEntity> {
+    return items.map {
+        GithubRepoEntity(
+            id = it.id,
+            repoName = it.repoName,
+            description = it.description,
+            language = it.language,
+            starsCount = it.starCount,
+            authorName = it.owner.name,
+            avatar = it.owner.avatar
+        )
+    }
+}
