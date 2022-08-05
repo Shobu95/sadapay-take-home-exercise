@@ -49,8 +49,8 @@ class MyGithubApiTest {
         assertThat(githubRepoObj.description, notNullValue())
         assertThat(githubRepoObj.language, notNullValue())
         assertThat(githubRepoObj.starCount, notNullValue())
-        assertThat(githubRepoObj.authorName, notNullValue())
-        assertThat(githubRepoObj.avatar, notNullValue())
+        assertThat(githubRepoObj.owner.name, notNullValue())
+        assertThat(githubRepoObj.owner.avatar, notNullValue())
     }
 
 }
