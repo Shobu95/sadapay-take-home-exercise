@@ -2,8 +2,10 @@ package com.shobu95.sadapay_takehomeexercise.data.remote
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.shobu95.sadapay_takehomeexercise.data.source.remote.client.RetrofitClient
 import com.shobu95.sadapay_takehomeexercise.data.source.remote.services.GithubRepoService
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.HiltTestApplication
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.MatcherAssert.assertThat
@@ -15,7 +17,11 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
+import org.robolectric.annotation.Config
+import javax.inject.Inject
 
+@HiltAndroidTest
+@Config(application = HiltTestApplication::class)
 @RunWith(AndroidJUnit4::class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class GithubApiTest {
@@ -23,11 +29,16 @@ class GithubApiTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var service: GithubRepoService
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
+
+
+    @Inject
+    lateinit var service: GithubRepoService
 
     @Before
-    fun setupService() {
-        service = RetrofitClient.githubRepoService
+    fun init() {
+        hiltRule.inject()
     }
 
     @Test
