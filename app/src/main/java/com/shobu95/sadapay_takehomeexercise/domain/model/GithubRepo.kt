@@ -10,9 +10,6 @@ data class GithubRepo(
     @SerializedName("name")
     val repoName: String,
 
-    @SerializedName("owner.login")
-    val authorName: String,
-
     @SerializedName("description")
     val description: String,
 
@@ -22,6 +19,16 @@ data class GithubRepo(
     @SerializedName("stargazers_count")
     val starCount: Int,
 
-    @SerializedName("owner.avatar_url")
-    val avatar: String,
+    @SerializedName("owner")
+    val owner: RepoOwner,
 )
+
+data class RepoOwner(
+
+    @SerializedName("login")
+    val name: String,
+
+    @SerializedName("avatar_url")
+    val avatar: String,
+
+    )
