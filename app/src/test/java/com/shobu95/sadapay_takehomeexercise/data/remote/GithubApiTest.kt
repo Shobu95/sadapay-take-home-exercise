@@ -13,7 +13,7 @@ import org.junit.Rule
 import org.junit.Test
 
 
-class MyGithubApiTest {
+class GithubApiTest {
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
