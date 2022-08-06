@@ -11,10 +11,10 @@ data class GithubRepoEntity(
     @PrimaryKey var id: Int,
     var repoName: String,
     var authorName: String,
-    var description: String,
-    var language: String,
+    var description: String?,
+    var language: String?,
     var starsCount: Int,
-    var avatar: String,
+    var avatar: String?,
 )
 
 fun List<GithubRepoEntity>.asDomainModel(): List<GithubRepo> {
