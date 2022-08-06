@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.shobu95.sadapay_takehomeexercise">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".GithubApp"
         android:allowBackup="true"
