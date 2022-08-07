@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,11 +13,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import com.shobu95.sadapay_takehomeexercise.R
 import com.shobu95.sadapay_takehomeexercise.domain.model.GithubRepo
 import com.shobu95.sadapay_takehomeexercise.domain.model.RepoOwner
 
@@ -53,7 +58,7 @@ fun TrendingRepoListItem(githubRepo: GithubRepo) {
         Row(
             modifier = Modifier
                 .padding(10.dp)
-                .fillMaxHeight()
+                .fillMaxWidth()
         ) {
             Image(
                 painter = rememberAsyncImagePainter(githubRepo.owner.avatar),
@@ -91,6 +96,43 @@ fun ExpandedItemView(githubRepo: GithubRepo) {
     Column(modifier = Modifier.padding(top = 4.dp)) {
         Text(
             text = githubRepo.description!!,
+            style = MaterialTheme.typography.body2,
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+
+            TextWithIcon(
+                icon = painterResource(id = R.drawable.language_icon),
+                text = githubRepo.language ?: "N/A"
+            )
+
+            TextWithIcon(
+                icon = painterResource(id = R.drawable.stars_icon),
+                text = githubRepo.starCount.toString()
+            )
+        }
+    }
+}
+
+@Composable
+fun TextWithIcon(icon: Painter, text: String) {
+    Row(
+        modifier = Modifier.padding(start = 8.dp, end = 18.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            modifier = Modifier
+                .size(25.dp)
+                .padding(end = 4.dp),
+            painter = icon,
+            contentDescription = text,
+        )
+        Text(
+            text = text,
             style = MaterialTheme.typography.body2,
         )
     }
