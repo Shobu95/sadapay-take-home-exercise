@@ -61,7 +61,7 @@ dependencies {
     def coil_version = "2.1.0"
     implementation "io.coil-kt:coil-compose:$coil_version"
 
-    def lottie_compose_verison = "1.0.0-beta07-1"
+    def lottie_compose_verison = "5.2.0"
     implementation "com.airbnb.android:lottie-compose:$lottie_compose_verison"
 
 
