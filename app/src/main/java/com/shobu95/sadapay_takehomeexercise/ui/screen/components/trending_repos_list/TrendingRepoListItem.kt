@@ -5,14 +5,17 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.shobu95.sadapay_takehomeexercise.domain.model.GithubRepo
 import com.shobu95.sadapay_takehomeexercise.domain.model.RepoOwner
@@ -25,7 +28,7 @@ fun TrendingRepoListItemPrev() {
             1,
             "Shoaib",
             "this is a description",
-            language = null,
+            language = "Python",
             starCount = 5,
             owner = RepoOwner(
                 name = "SHobu",
@@ -37,27 +40,27 @@ fun TrendingRepoListItemPrev() {
 
 @Composable
 fun TrendingRepoListItem(githubRepo: GithubRepo) {
+
+    var isExpanded by rememberSaveable { mutableStateOf(false) }
+
     Card(
         elevation = 2.dp,
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp)
+            .clickable { isExpanded = !isExpanded },
     ) {
-
-        var isExpanded by remember { mutableStateOf(false) }
-
         Row(
             modifier = Modifier
-                .padding(6.dp)
+                .padding(10.dp)
                 .fillMaxHeight()
-                .clickable { isExpanded = !isExpanded },
-            verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 painter = rememberAsyncImagePainter(githubRepo.owner.avatar),
                 contentDescription = "github user avatar",
                 modifier = Modifier
-                    .size(40.dp)
+                    .padding(end = 14.dp, start = 6.dp)
+                    .size(50.dp)
                     .clip(CircleShape)
             )
 
@@ -67,17 +70,28 @@ fun TrendingRepoListItem(githubRepo: GithubRepo) {
                     .weight(1f)
             ) {
                 Text(
+                    text = githubRepo.owner.name,
+                    style = MaterialTheme.typography.body2,
+                )
+                Text(
                     text = githubRepo.repoName,
-                    fontSize = 22.sp,
+                    style = MaterialTheme.typography.h6,
                 )
                 if (isExpanded) {
-                    Text(
-                        text = githubRepo.description!!,
-                        fontSize = 22.sp,
-                    )
+                    ExpandedItemView(githubRepo = githubRepo)
                 }
             }
         }
 
+    }
+}
+
+@Composable
+fun ExpandedItemView(githubRepo: GithubRepo) {
+    Column(modifier = Modifier.padding(top = 4.dp)) {
+        Text(
+            text = githubRepo.description!!,
+            style = MaterialTheme.typography.body2,
+        )
     }
 }
