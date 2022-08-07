@@ -38,6 +38,9 @@ class GithubViewModel
     fun onEvent(event: GithubUiEvent) {
         when (event) {
             GithubUiEvent.OnReload -> {
+                state = state.copy(
+                    hasLocalData = false
+                )
                 refreshDataInRepository()
             }
             GithubUiEvent.OnToggleTheme -> {
