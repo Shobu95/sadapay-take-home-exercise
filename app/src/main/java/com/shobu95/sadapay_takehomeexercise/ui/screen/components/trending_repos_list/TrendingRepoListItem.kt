@@ -1,11 +1,12 @@
 package com.shobu95.sadapay_takehomeexercise.ui.screen.components.trending_repos_list
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,7 +24,7 @@ fun TrendingRepoListItemPrev() {
         githubRepo = GithubRepo(
             1,
             "Shoaib",
-            "Description",
+            "this is a description",
             language = null,
             starCount = 5,
             owner = RepoOwner(
@@ -42,10 +43,14 @@ fun TrendingRepoListItem(githubRepo: GithubRepo) {
             .fillMaxWidth()
             .padding(vertical = 4.dp)
     ) {
+
+        var isExpanded by remember { mutableStateOf(false) }
+
         Row(
             modifier = Modifier
                 .padding(6.dp)
-                .fillMaxHeight(),
+                .fillMaxHeight()
+                .clickable { isExpanded = !isExpanded },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
@@ -65,6 +70,12 @@ fun TrendingRepoListItem(githubRepo: GithubRepo) {
                     text = githubRepo.repoName,
                     fontSize = 22.sp,
                 )
+                if (isExpanded) {
+                    Text(
+                        text = githubRepo.description!!,
+                        fontSize = 22.sp,
+                    )
+                }
             }
         }
 
