@@ -17,11 +17,11 @@ import com.shobu95.sadapay_takehomeexercise.R
 @Preview
 @Composable
 fun ErrorViewPrev() {
-    ErrorView()
+//    ErrorView()
 }
 
 @Composable
-fun ErrorView() {
+fun ErrorView(onRetry: () -> Unit) {
 
     Column(
         modifier = Modifier
@@ -32,7 +32,7 @@ fun ErrorView() {
     ) {
         ErrorAnimation()
         ErrorMessage()
-        RetryButton()
+        RetryButton(onRetry)
     }
 
 }
@@ -72,8 +72,11 @@ fun ErrorMessage() {
 }
 
 @Composable
-fun RetryButton() {
-    Button(onClick = {}, modifier = Modifier.fillMaxWidth()) {
+fun RetryButton(onRetry: () -> Unit) {
+    Button(
+        onClick = onRetry,
+        modifier = Modifier.fillMaxWidth()
+    ) {
         Text(text = "Retry")
     }
 
