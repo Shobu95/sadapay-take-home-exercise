@@ -30,7 +30,7 @@ fun GithubTopAppBar(
                 onDismissRequest = { menuDisplayed = false }
             ) {
                 DropdownMenuItem(
-                    onClick = { onToggleTheme }
+                    onClick = { onToggleTheme() }
                 ) {
                     Text(text = "Toggle Theme")
                 }
