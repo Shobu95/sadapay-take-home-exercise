@@ -6,4 +6,5 @@ data class GithubUiState(
     val githubRepos: List<GithubRepo> = emptyList(),
     val isLoading: Boolean = false,
     val isError: Boolean = false,
+    val hasLocalData: Boolean = false,
 )
