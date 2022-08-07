@@ -4,18 +4,16 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
-import androidx.compose.ui.graphics.Color
 
 @Composable
 fun GithubTopAppBar(
+    onToggleTheme: () -> Unit,
 ) {
 
     var menuDisplayed by remember { mutableStateOf(false) }
 
     TopAppBar(
         title = { Text(text = "Trending") },
-        backgroundColor = Color.White,
-        contentColor = Color.Black,
         actions = {
 
             IconButton(
@@ -32,9 +30,9 @@ fun GithubTopAppBar(
                 onDismissRequest = { menuDisplayed = false }
             ) {
                 DropdownMenuItem(
-                    onClick = { }
+                    onClick = { onToggleTheme }
                 ) {
-                    Text(text = "Dark Mode")
+                    Text(text = "Toggle Theme")
                 }
             }
         }
