@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.shobu95.sadapay_takehomeexercise.domain.model.GithubRepo
 import com.shobu95.sadapay_takehomeexercise.ui.screen.components.trending_repos_list.TrendingRepoListItem
@@ -14,6 +15,7 @@ import com.shobu95.sadapay_takehomeexercise.ui.screen.components.trending_repos_
 fun TrendingRepoList(githubRepoList: List<GithubRepo>) {
     LazyColumn(
         modifier = Modifier
+            .testTag("repos_list")
             .fillMaxSize()
             .padding(8.dp)) {
         items(githubRepoList) { githubRepo ->
