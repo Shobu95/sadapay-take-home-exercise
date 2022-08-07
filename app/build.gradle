@@ -83,8 +83,6 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 
-    // Hilt-Lifecycle-Viewmodel
-//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
 
     def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -94,6 +92,8 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
+    def accompanist_version = "0.25.0"
+    implementation "com.google.accompanist:accompanist-swiperefresh:0.19.0"
 
 
 
