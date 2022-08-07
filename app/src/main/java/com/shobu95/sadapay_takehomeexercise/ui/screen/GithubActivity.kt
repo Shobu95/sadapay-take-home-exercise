@@ -70,7 +70,10 @@ fun ScreenBody(viewModel: GithubViewModel) {
             }
 
             if (viewModel.state.githubRepos.isNotEmpty()) {
-                TrendingRepoList(githubRepoList = viewModel.state.githubRepos)
+                TrendingRepoList(
+                    githubRepoList = viewModel.state.githubRepos,
+                    onSwipeRefresh = { viewModel.onEvent(GithubUiEvent.OnReload) }
+                )
             }
 
         }
