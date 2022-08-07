@@ -7,7 +7,7 @@ import com.shobu95.sadapay_takehomeexercise.ui.screen.components.shimmer.Shimmer
 @Composable
 fun ShimmerList() {
     LazyColumn {
-        items(8) {
+        items(12) {
             ShimmerListItemEffect()
         }
     }

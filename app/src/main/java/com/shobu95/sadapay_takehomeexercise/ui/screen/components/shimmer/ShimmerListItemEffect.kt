@@ -29,7 +29,7 @@ fun ShimmerListItemEffect() {
         targetValue = 1000f,
         animationSpec = infiniteRepeatable(
             animation = tween(
-                durationMillis = 1200, // duration for the animation
+                durationMillis = 1000, // duration for the animation
                 easing = LinearEasing
             )
         )
