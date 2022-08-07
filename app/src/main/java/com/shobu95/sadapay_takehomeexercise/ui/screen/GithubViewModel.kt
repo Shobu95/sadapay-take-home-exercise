@@ -24,6 +24,9 @@ class GithubViewModel
     var state by mutableStateOf(GithubUiState())
         private set
 
+    var isDarkTheme by mutableStateOf(false)
+        private set
+
     private var getTransactionsJob: Job? = null
 
 
@@ -36,6 +39,9 @@ class GithubViewModel
         when (event) {
             GithubUiEvent.OnReload -> {
                 refreshDataInRepository()
+            }
+            GithubUiEvent.OnToggleTheme -> {
+                isDarkTheme = !isDarkTheme
             }
         }
     }
