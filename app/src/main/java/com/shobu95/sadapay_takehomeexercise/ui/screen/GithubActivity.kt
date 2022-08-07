@@ -8,13 +8,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.shobu95.sadapay_takehomeexercise.ui.screen.components.ErrorView
+import com.shobu95.sadapay_takehomeexercise.ui.screen.components.GithubTopAppBar
 import com.shobu95.sadapay_takehomeexercise.ui.screen.components.ShimmerList
 import com.shobu95.sadapay_takehomeexercise.ui.screen.components.TrendingRepoList
 import com.shobu95.sadapay_takehomeexercise.ui.screen.state_event.GithubUiEvent
@@ -30,7 +33,9 @@ class GithubActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            GithubTheme {
+            GithubTheme(
+                darkTheme = viewModel.isDarkTheme
+            ) {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -43,27 +48,37 @@ class GithubActivity : ComponentActivity() {
 
 @Composable
 fun ScreenBody(viewModel: GithubViewModel) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+    Scaffold(
+        topBar = {
+            GithubTopAppBar {
+                viewModel.onEvent(GithubUiEvent.OnToggleTheme)
+            }
+        }
     ) {
+        Column(
+            modifier = Modifier
+                .padding(it)
+                .fillMaxSize()
+                .background(Color.White),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
-        if (viewModel.state.isLoading) {
-            ShimmerList()
+            if (viewModel.state.isLoading) {
+                ShimmerList()
+            }
+
+            if (viewModel.state.isError) {
+                ErrorView { viewModel.onEvent(GithubUiEvent.OnReload) }
+            }
+
+            if (viewModel.state.githubRepos.isNotEmpty()) {
+                TrendingRepoList(githubRepoList = viewModel.state.githubRepos)
+            }
+
         }
-
-        if (viewModel.state.isError) {
-            ErrorView { viewModel.onEvent(GithubUiEvent.OnReload) }
-        }
-
-        if (viewModel.state.githubRepos.isNotEmpty()) {
-            TrendingRepoList(githubRepoList = viewModel.state.githubRepos)
-        }
-
     }
+
 }
 
 
