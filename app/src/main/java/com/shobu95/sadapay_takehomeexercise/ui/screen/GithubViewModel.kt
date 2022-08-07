@@ -35,24 +35,23 @@ class GithubViewModel
     fun onEvent(event: GithubUiEvent) {
         when (event) {
             GithubUiEvent.OnReload -> {
-                viewModelScope.launch {
-                    refreshDataInRepository()
-                }
+                refreshDataInRepository()
             }
         }
     }
 
 
     private fun refreshDataInRepository() {
+        state = state.copy(
+            isError = false,
+            isLoading = true
+        )
         viewModelScope.launch {
-            state = try {
+            try {
                 useCase.refreshGithubRepos()
-                state.copy(
-                    isLoading = true,
-                )
             } catch (ex: Exception) {
                 ex.printStackTrace()
-                state.copy(
+                state = state.copy(
                     isLoading = false,
                     isError = (!state.hasLocalData)
                 )
@@ -73,8 +72,7 @@ class GithubViewModel
                 )
                 if (transactions.isEmpty()) {
                     state = state.copy(
-                        isLoading = true,
-                        hasLocalData = false
+                        hasLocalData = false,
                     )
                 }
             }.launchIn(viewModelScope)
