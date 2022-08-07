@@ -9,7 +9,9 @@ import com.shobu95.sadapay_takehomeexercise.domain.use_case.GithubReposUseCase
 import com.shobu95.sadapay_takehomeexercise.ui.screen.state_event.GithubUiEvent
 import com.shobu95.sadapay_takehomeexercise.ui.screen.state_event.GithubUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,18 +24,12 @@ class GithubViewModel
     var state by mutableStateOf(GithubUiState())
         private set
 
-    init {
-        refreshDataInRepository()
-        useCase.getGithubRepos().map {
-            if (it.isNotEmpty()) {
-                state = state.copy(
-                    githubRepos = it,
-                    isLoading = false,
-                    isError = false
-                )
-            }
+    private var getTransactionsJob: Job? = null
 
-        }
+
+    init {
+        getTransactions()
+        refreshDataInRepository()
     }
 
     fun onEvent(event: GithubUiEvent) {
@@ -53,14 +49,34 @@ class GithubViewModel
                 useCase.refreshGithubRepos()
                 state.copy(
                     isLoading = true,
-                    isError = false,
                 )
             } catch (ex: Exception) {
+                ex.printStackTrace()
                 state.copy(
                     isLoading = false,
-                    isError = true
+                    isError = (!state.hasLocalData)
                 )
             }
         }
+    }
+
+
+    private fun getTransactions() {
+        getTransactionsJob?.cancel()
+        getTransactionsJob = useCase.getGithubRepos()
+            .onEach { transactions ->
+                state = state.copy(
+                    githubRepos = transactions,
+                    isLoading = false,
+                    isError = false,
+                    hasLocalData = true,
+                )
+                if (transactions.isEmpty()) {
+                    state = state.copy(
+                        isLoading = true,
+                        hasLocalData = false
+                    )
+                }
+            }.launchIn(viewModelScope)
     }
 }
