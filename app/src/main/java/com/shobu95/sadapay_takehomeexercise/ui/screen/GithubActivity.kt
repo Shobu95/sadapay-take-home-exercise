@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +14,6 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.shobu95.sadapay_takehomeexercise.ui.screen.components.ErrorView
 import com.shobu95.sadapay_takehomeexercise.ui.screen.components.GithubTopAppBar
 import com.shobu95.sadapay_takehomeexercise.ui.screen.components.ShimmerList
@@ -39,7 +37,7 @@ class GithubActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = MaterialTheme.colors.background,
                 ) { ScreenBody(viewModel) }
             }
         }
@@ -58,8 +56,7 @@ fun ScreenBody(viewModel: GithubViewModel) {
         Column(
             modifier = Modifier
                 .padding(it)
-                .fillMaxSize()
-                .background(Color.White),
+                .fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
