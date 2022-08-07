@@ -43,6 +43,7 @@ class GithubActivityTest {
             .assertIsDisplayed()
     }
 
+    // close WIFI and clear cache/data before running this test
     @Test
     fun `4-should-show-error-view-when-internet-is-down-and-no-data-in-db`() {
         composeTestRule
