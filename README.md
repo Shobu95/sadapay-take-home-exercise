@@ -40,6 +40,8 @@ Separate Data classes have been made for each layer and data source.
 - DTO for Retrofit (can be mapped to Entity/Database Model)
 - Domain Model (normal data class used for displaying data)
 
+![system_design (1)](https://user-images.githubusercontent.com/20271259/183408804-6b53c2a0-7013-48ad-912b-0c27c83dde50.jpg)
+
 
 ## Things to note: 
 - If the user uses swipe-refresh while the list is loaded and the API call fails, in this case the app will show the error view because the user has explicitly requested data from the remote data source. The data from the local source will not be shown. 
