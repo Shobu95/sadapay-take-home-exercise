@@ -32,6 +32,7 @@ This test project contains all functionality that was requested in the document,
 - Compose UI testing
 - Roboelectric
 
+
 ## Architecture
 Application is built using Clean-MVVM and Modern Android Architecture, consisting of Repository layer, which uses local (Room DB) and remote (Retrofit) data sources, UseCase Layer containing business logic, ViewModel and finally a Composable UI. The ViewModel and UI communicate through state and events. UI send events to ViewModel and UI observes the state from the ViewModel.
 Separate Data classes have been made for each layer and data source.
@@ -40,10 +41,10 @@ Separate Data classes have been made for each layer and data source.
 - Domain Model (normal data class used for displaying data)
 
 
-
 ## Things to note: 
 - If the user uses swipe-refresh while the list is loaded and the API call fails, in this case the app will show the error view because the user has explicitly requested data from the remote data source. The data from the local source will not be shown. 
 - If the internet or the API is down and the data is present in the local source, the data from the local source will be shown (with the cached images), unless the user refreshes it or clear the cache from settings.
+
 
 ## References:
 **Modern Android Architecture**: https://developer.android.com/topic/architecture
