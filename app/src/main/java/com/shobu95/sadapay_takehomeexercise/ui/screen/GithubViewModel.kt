@@ -9,6 +9,8 @@ import com.shobu95.sadapay_takehomeexercise.domain.use_case.GithubReposUseCase
 import com.shobu95.sadapay_takehomeexercise.ui.screen.state_event.GithubUiEvent
 import com.shobu95.sadapay_takehomeexercise.ui.screen.state_event.GithubUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -20,7 +22,7 @@ class GithubViewModel
 @Inject constructor(
     private val useCase: GithubReposUseCase,
 ) : ViewModel() {
-
+    
     var state by mutableStateOf(GithubUiState())
         private set
 
